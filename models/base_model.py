@@ -7,6 +7,7 @@ import uuid
     Class base for the others classes
 """
 
+
 class BaseModel():
 
     def __init__(self):
@@ -28,9 +29,7 @@ class BaseModel():
 
     def to_dict(self):
         ans = self.__dict__
-        ans.update({'__class__':__class__.__name__})
+        ans.update({'__class__': __class__.__name__})
         ans['created_at'] = ans['created_at'].isoformat()
         ans['updated_at'] = ans['updated_at'].isoformat()
         return ans
-
-
