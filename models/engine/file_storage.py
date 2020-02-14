@@ -30,7 +30,3 @@ class FileStorage():
                 txt = a.read()
             return json.loads(txt)
         return {}
-
-    @objects.setter
-    def objects(self, value={}):
-        self.__objects = value
