@@ -20,27 +20,16 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
-        key = obj['__class__'] + "." + obj['id']
+        #key = obj['__class__'] + "." + obj['id']
+        key = obj.__class__.__name__ + "." + obj.id
         self.__objects[key] = obj
 
-    def to_dict(s):
-        ans = s.__dict__.copy()
-        ans.update({'__class__': __class__.__name__})
-        ans['created_at'] = ans['created_at'].isoformat()
-        ans['updated_at'] = ans['updated_at'].isoformat()
-        return ans
-
     def save(self):
-        new = {}
         with open(self.__file_path, mode="w", encoding="UTF-8") as a:
-            #for key, value in self.__objects.items():
-            #    print("__________")
-            #    print(value)
-            #    print("Type: ", type(value))
-            #    new[key] = to_dict(value)
-            print("Tipo")
-            print(self.__objects.__class__.__name__)
-            txt = json.dumps(self.__objects)
+            new = {}
+            for key, value in self.__objects.items():
+                new[key] = value.to_dict()
+            txt = json.dumps(new)
             a.write(txt)
 
     def reload(self):
@@ -51,7 +40,4 @@ class FileStorage:
                 dic = json.loads(txt)
                 for key, value in dic.items():
                     obj = BaseModel(**value)
-                    print("Objeto nuevo")
-                    print(obj)
-                    print("Key: ", key)
                     self.__objects[key] =  obj

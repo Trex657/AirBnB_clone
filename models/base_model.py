@@ -22,7 +22,7 @@ class BaseModel():
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            models.storage.new(self.to_dict())
+            models.storage.new(self)
 
     def save(self):
         self.updated_at = datetime.now()
@@ -34,6 +34,7 @@ class BaseModel():
         ans['created_at'] = ans['created_at'].isoformat()
         ans['updated_at'] = ans['updated_at'].isoformat()
         return ans
+        #return self.__dict__.copy()
 
     def __str__(self):
         return "[BaseModel] ("+self.id+")"+str(self.__dict__)
