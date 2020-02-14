@@ -33,14 +33,12 @@ class FileStorage:
     def save(self):
         new = {}
         with open(self.__file_path, mode="w", encoding="UTF-8") as a:
-            #for key, value in self.__objects.items():
-            #    print("__________")
-            #    print(value)
-            #    print("Type: ", type(value))
-            #    new[key] = to_dict(value)
-            print("Tipo")
-            print(self.__objects.__class__.__name__)
-            txt = json.dumps(self.__objects)
+            for key, value in self.__objects.items():
+                print("___")
+                print(value)
+                print("Type: ", type(value))
+                new[key] = to_dict(value)
+            txt = json.dumps(new)
             a.write(txt)
 
     def reload(self):

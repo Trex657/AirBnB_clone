@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 
-from models.engine.file_storage import FileStorage
+from models import base_model
+from models.engine import file_storage
 
 """
     bla bla bla
 """
 
-storage = FileStorage()
-storage.objects = storage.reload()
+storage = file_storage.FileStorage()
+storage.reload()
